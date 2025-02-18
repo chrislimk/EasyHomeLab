@@ -18,5 +18,5 @@ services:
     - PROXIED=true
     - ZONE=<domain> #eg. yourdomain.com
 
-    restart: unless-stopped
+    restart: always
 ```
