@@ -1,5 +1,11 @@
 # Create unifi-controller application
 
+## Create container folders
+```
+mkdir -p /volume1/Docker/Unifi/unifi-app
+mkdir -p /volume1/Docker/Unifi/unifi-mongo
+```
+
 ## Create init-mongo.js
 ```
 vi /volume1/Docker/Unifi/unifi-mongo/init-mongo.js
@@ -9,11 +15,7 @@ Paste and save
 db.getSiblingDB("unifi").createUser({user: "unifi", pwd: "P@ssw0rd", roles: [{role: "dbOwner", db: "unifi"}]});
 db.getSiblingDB("unifi_stat").createUser({user: "unifi", pwd: "P@ssw0rd", roles: [{role: "dbOwner", db: "unifi_stat"}]});
 ```
-## Create container folders
-```
-mkdir -p /volume1/Docker/Unifi/unifi-app
-mkdir -p /volume1/Docker/Unifi/unifi-mongo
-```
+
 ## Deploy stack
 ```
 version: "3.2"
