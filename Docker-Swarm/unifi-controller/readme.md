@@ -7,6 +7,11 @@ Paste and save
 db.getSiblingDB("unifi").createUser({user: "unifi", pwd: "P@ssw0rd", roles: [{role: "dbOwner", db: "unifi"}]});
 db.getSiblingDB("unifi_stat").createUser({user: "unifi", pwd: "P@ssw0rd", roles: [{role: "dbOwner", db: "unifi_stat"}]});
 ```
+Create container folders
+```
+mkdir -p /dockerssd/unifi-app
+mkdir -p /dockerssd/unifi-mongo
+```
 Deploy stack
 ```
 version: "3.2"
