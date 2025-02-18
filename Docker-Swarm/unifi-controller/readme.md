@@ -7,7 +7,7 @@ Paste and save
 db.getSiblingDB("unifi").createUser({user: "unifi", pwd: "P@ssw0rd", roles: [{role: "dbOwner", db: "unifi"}]});
 db.getSiblingDB("unifi_stat").createUser({user: "unifi", pwd: "P@ssw0rd", roles: [{role: "dbOwner", db: "unifi_stat"}]});
 ```
-
+Deploy stack
 ```
 version: "3.2"
 services:
@@ -59,18 +59,35 @@ services:
       - /dockerssd/unifi-mongo/init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
     restart: unless-stopped
 
+# Bind Local volume
 volumes:
   unifi_config:
     driver: local
     driver_opts:
-      type: nfs
-      o: addr=192.168.4.43,rw,soft
-      device: ":/mnt/SSD/Docker/unifi-network-app"
+      type: "none"
+      o: "bind"
+      device: "/dockerssd/unifi-app"
 
   unifi_mongo_config:
     driver: local
     driver_opts:
-      type: nfs
-      o: addr=192.168.4.43,rw,soft
-      device: ":/mnt/SSD/Docker/unifi-mongo"
+      type: "none"
+      o: "bind"
+      device: "/dockerssd/unifi-mongo"
+
+# If using NFS
+#volumes:
+#  unifi_config:
+#    driver: local
+#    driver_opts:
+#      type: nfs
+#      o: addr=192.168.4.2,rw,soft
+#      device: ":/mnt/SSD/Docker/unifi-network-app"
+
+#  unifi_mongo_config:
+#    driver: local
+#    driver_opts:
+#      type: nfs
+#      o: addr=192.168.4.2,rw,soft
+#      device: ":/mnt/SSD/Docker/unifi-mongo"
 ```
