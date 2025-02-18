@@ -26,7 +26,7 @@ services:
       - PGID=1000
       - TZ=Asia/Singapore
       - MONGO_USER=unifi
-      - MONGO_PASS=P%40ssw0rd
+      - MONGO_PASS=P%40ssw0rd #text replacement because @ is not supported
       - MONGO_HOST=unifi-db
       - MONGO_PORT=27017
       - MONGO_DBNAME=unifi
