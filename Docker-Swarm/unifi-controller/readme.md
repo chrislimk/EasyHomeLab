@@ -2,7 +2,7 @@
 
 ## Create init-mongo.js
 ```
-nano /dockerssd/unifi-mongo/init-mongo.js
+vi /volume1/Docker/Unifi/unifi-mongo/init-mongo.js
 ```
 Paste and save
 ```
@@ -11,8 +11,8 @@ db.getSiblingDB("unifi_stat").createUser({user: "unifi", pwd: "P@ssw0rd", roles:
 ```
 ## Create container folders
 ```
-mkdir -p /dockerssd/unifi-app
-mkdir -p /dockerssd/unifi-mongo
+mkdir -p /volume1/Docker/Unifi/unifi-app
+mkdir -p /volume1/Docker/Unifi/unifi-mongo
 ```
 ## Deploy stack
 ```
@@ -63,7 +63,7 @@ services:
           - "node.role==worker"
     volumes:
       - unifi_mongo_config:/data/db
-      - /dockerssd/unifi-mongo/init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+      - /volume1/Docker/Unifi/unifi-mongo/init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
     restart: unless-stopped
 
 # Bind Local volume
@@ -73,14 +73,14 @@ volumes:
     driver_opts:
       type: "none"
       o: "bind"
-      device: "/dockerssd/unifi-app"
+      device: "/volume1/Docker/Unifi/unifi-app"
 
   unifi_mongo_config:
     driver: local
     driver_opts:
       type: "none"
       o: "bind"
-      device: "/dockerssd/unifi-mongo"
+      device: "/volume1/Docker/Unifi/unifi-mongo"
 
 # If using NFS
 #volumes:
